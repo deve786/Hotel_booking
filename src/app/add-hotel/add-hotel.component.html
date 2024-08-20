@@ -1,0 +1,44 @@
+<div class="p-6 bg-white rounded-lg shadow-md">
+    
+
+    <!-- Add Hotel Form -->
+    <div class="mb-6">
+        <h3 class="text-xl font-medium mb-2">Add New Hotel</h3>
+        <form  #hotelForm="ngForm">
+            <div class="mb-4">
+                <label for="hotelName" class="block text-sm font-medium text-gray-700">Hotel Name</label>
+                <input id="hotelName" name="hotelName" type="text"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     required>
+            </div>
+            <div class="mb-4">
+                <label for="hotelLocation" class="block text-sm font-medium text-gray-700">Location</label>
+                <input id="hotelLocation" name="hotelLocation" type="text"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     required>
+            </div>
+            <div class="mb-4">
+                <label for="hotelDescription" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea id="hotelDescription" name="hotelDescription" rows="3"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     required></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="hotelImage" class="block text-sm font-medium text-gray-700">Image URL</label>
+                <input id="hotelImage" name="hotelImage" type="text"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     required>
+            </div>
+            <div class="mb-4">
+                <label for="hotelAmenities" class="block text-sm font-medium text-gray-700">Amenities</label>
+                <input id="hotelAmenities" name="hotelAmenities" type="text"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     required>
+            </div>
+            <button type="submit"
+                class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700">Add Hotel</button>
+        </form>
+    </div>
+
+    <!-- Optional: List of added hotels could go here -->
+</div>

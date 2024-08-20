@@ -1,0 +1,24 @@
+<div class="p-10">
+  <h3 class="text-4xl font-bold uppercase text-center mb-5">Our Hotels</h3>
+
+  <div class="flex flex-wrap justify-center cursor-pointer gap-5">
+    <app-card *ngFor="let hotel of paginatedHotels" [hotel]="hotel"></app-card>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="flex justify-center gap-2 mt-5">
+    <button 
+      class="px-4 py-1 bg-gray-300 rounded-lg" 
+      [disabled]="currentPage === 1" 
+      (click)="setPage(currentPage - 1)">
+      Previous
+    </button>
+    <span class="self-center">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button 
+      class="px-4 py-1 bg-gray-300 rounded-lg" 
+      [disabled]="currentPage === totalPages" 
+      (click)="setPage(currentPage + 1)">
+      Next
+    </button>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="flex min-h-screen  bg-gray-50">
+    <!-- Sidebar -->
+    <nav class="w-64 bg-gray-800 text-white p-6 shadow-lg">
+      <div class="mb-8">
+        <h1 class="text-2xl font-semibold">Dashboard</h1>
+      </div>
+      <ul class="space-y-4">
+        <li>
+          <a routerLink="user" routerLinkActive="font-bold" class="flex items-center text-gray-300 hover:text-white transition-colors">
+            <span class="material-icons mr-3">person</span> User
+          </a>
+        </li>
+        <li>
+          <a routerLink="current-bookings" routerLinkActive="font-bold" class="flex items-center text-gray-300 hover:text-white transition-colors">
+            <span class="material-icons mr-3">calendar_today</span> Current Bookings
+          </a>
+        </li>
+        <li>
+          <a routerLink="past-bookings" routerLinkActive="font-bold" class="flex items-center text-gray-300 hover:text-white transition-colors">
+            <span class="material-icons mr-3">history</span> Past Bookings
+          </a>
+        </li>
+        <li>
+          <a routerLink="personal-details" routerLinkActive="font-bold" class="flex items-center text-gray-300 hover:text-white transition-colors">
+            <span class="material-icons mr-3">settings</span> Personal Details
+          </a>
+        </li>
+        <!-- Additional links can be added here -->
+      </ul>
+    </nav>
+    <!-- Main Content Area -->
+    <div class="flex-1 p-8">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  

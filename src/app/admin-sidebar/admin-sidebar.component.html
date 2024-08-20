@@ -1,0 +1,41 @@
+<div class="flex min-h-screen  bg-gray-100">
+    <!-- Sidebar -->
+    <nav class="w-72 bg-gray-800 text-white p-6 shadow-lg">
+      <div class="mb-8">
+        <h1 class="text-2xl font-semibold">Admin Dashboard</h1>
+      </div>
+      <ul class="space-y-4">
+        <li>
+          <a routerLink="user-management" routerLinkActive="font-bold" class="flex items-center text-gray-300 hover:text-white transition-colors">
+            <span class="material-icons mr-3">people</span>
+            <span>User Management</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="manage-bookings" routerLinkActive="font-bold" class="flex items-center text-gray-300 hover:text-white transition-colors">
+            <span class="material-icons mr-3">event</span>
+            <span>Bookings Management</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="hotel-management" routerLinkActive="font-bold" class="flex items-center text-gray-300 hover:text-white transition-colors">
+            <span class="material-icons mr-3">hotel</span>
+            <span>Hotel Management</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="analytics" routerLinkActive="font-bold" class="flex items-center text-gray-300 hover:text-white transition-colors">
+            <span class="material-icons mr-3">bar_chart</span>
+            <span>Analytics</span>
+          </a>
+        </li>
+        
+      </ul>
+    </nav>
+  
+    <!-- Main Content Area -->
+    <div class="flex-1 p-8">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  
