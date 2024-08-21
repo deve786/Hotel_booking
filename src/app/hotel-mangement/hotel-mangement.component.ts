@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ApiServicesService } from '../allServices/api-services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hotel-mangement',
@@ -7,21 +9,44 @@ import { Component } from '@angular/core';
 })
 export class HotelMangementComponent {
   hotels: any[] = [];
+  baseUrl = 'http://localhost:5000';
 
-  constructor() { }
+  constructor(private as: ApiServicesService, private router: Router) { }
 
   ngOnInit(): void {
-    // Call a method to fetch the hotels data
-    this.loadHotels();
+    this.getAllHotels()
   }
 
-  // Method to fetch hotels data
-  loadHotels(): void {
-    // Sample data; replace this with actual service call to fetch data
-    this.hotels = [
-      { id: 1, name: 'Hotel Sunshine', location: 'New York' },
-      { id: 2, name: 'Hotel Moonlight', location: 'Los Angeles' },
-      // Add more sample hotels as needed
-    ];
+  getAllHotels() {
+    this.as.getHotels().subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.hotels = result;
+      },
+      error: (result: any) => {
+        console.log(result.error);
+      }
+    });
   }
+
+  getImageUrl(photoPath: string): string {
+    return `${this.baseUrl}/${photoPath}`;
+  }
+
+  deleteHotel(id: any) {
+    this.as.deleteHotel(id).subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.getAllHotels();
+      },
+      error: (error: any) => {
+        console.log(error.error);
+      }
+    });
+  }
+  editHotel(id: any) {
+    this.router.navigateByUrl(`/edit-hotel/${id}`);
+  }
+  
+  
 }

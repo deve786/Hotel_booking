@@ -1,0 +1,18 @@
+<form [formGroup]="editHotelForm" (ngSubmit)="updateHotel()">
+    <input formControlName="name" placeholder="Hotel Name">
+    <input formControlName="location" placeholder="Location">
+    <input formControlName="pricePerNight" placeholder="Price Per Night">
+    <textarea formControlName="description" placeholder="Description"></textarea>
+  
+    <!-- Amenities -->
+    <label>
+      <input type="checkbox" formControlName="wifi"> Wi-Fi
+    </label>
+    <label>
+      <input type="checkbox" formControlName="parking"> Parking
+    </label>
+    <!-- Add other amenities similarly -->
+  
+    <button type="submit" [disabled]="!editHotelForm.valid">Update Hotel</button>
+  </form>
+  

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiServicesService } from '../allServices/api-services.service';
 
 @Component({
   selector: 'app-all-hotels',
@@ -6,39 +7,72 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-hotels.component.css']
 })
 export class AllHotelsComponent implements OnInit {
-  hotels = [
-    { id: 1, name: "Stay Home", location: "Kochi, Kerala", rating: 4.5, price: 200, image: "assets/photo2.jpg" },
-    { id: 2, name: "Urban Retreat", location: "New York, NY", rating: 4.8, price: 350, image: "assets/photo3.jpg" },
-    { id: 3, name: "Beachside Bliss", location: "Malibu, CA", rating: 4.7, price: 450, image: "assets/photo4.webp" },
-    { id: 4, name: "Mountain Escape", location: "Aspen, CO", rating: 4.9, price: 300, image: "assets/photo5.webp" },
-    { id: 5, name: "City Lights Hotel", location: "San Francisco, CA", rating: 4.6, price: 275, image: "assets/photo6.jpeg" },
-    { id: 6, name: "Luxury Suite", location: "Paris, France", rating: 4.8, price: 500, image: "assets/photo7.avif" },
-    { id: 7, name: "Cozy Corner", location: "Tokyo, Japan", rating: 4.4, price: 220, image: "assets/photo8.webp" },
-    { id: 8, name: "Ocean View Retreat", location: "Miami, FL", rating: 4.7, price: 350, image: "assets/photo9.webp" },
-    { id: 9, name: "Historic Charm", location: "Rome, Italy", rating: 4.6, price: 275, image: "assets/photo10.jpg" },
-    { id: 10, name: "Modern Oasis", location: "Los Angeles, CA", rating: 4.5, price: 290, image: "assets/photo2.jpg" }
-  ];
-
+  hotels = [];
+  filteredHotels = [];
+  
+  searchTerm: string = '';
+  sortBy: string = ''; 
   currentPage: number = 1;
   itemsPerPage: number = 8;
+
+  constructor(private as: ApiServicesService) { }
+
+  ngOnInit() {
+    this.getHotels();
+  }
+
+  getHotels() {
+    this.as.getHotels().subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.hotels = result;
+        // this.filteredHotels = [...this.hotels]; // Initialize filteredHotels
+        // this.applyFilters(); // Apply filters after fetching hotels
+      },
+      error: (err) => {
+        console.error('Error fetching hotels:', err);
+      }
+    });
+  }
 
   get paginatedHotels() {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
-    return this.hotels.slice(start, end);
+    return this.filteredHotels.slice(start, end);
   }
 
-  ngOnInit() {
-    // Initialization code if needed
+  get totalPages() {
+    return Math.ceil(this.filteredHotels.length / this.itemsPerPage);
   }
+
+  // // applyFilters() {
+  // //   // Filter by search term
+  // //   this.filteredHotels = this.hotels.filter(hotel =>
+  // //     hotel.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+  // //   );
+
+  //   // Sort based on the selected sort option
+  //   this.sortHotels();
+
+  //   // Paginate after applying filters and sorting
+  //   this.setPage(1);
+  // }
+
+  // sortHotels() {
+  //   if (this.sortBy === 'name') {
+  //     this.filteredHotels.sort((a, b) => a.name.localeCompare(b.name));
+  //   } else if (this.sortBy === 'priceAsc') {
+  //     this.filteredHotels.sort((a, b) => a.price - b.price);
+  //   } else if (this.sortBy === 'priceDesc') {
+  //     this.filteredHotels.sort((a, b) => b.price - a.price);
+  //   } else if (this.sortBy === 'rating') {
+  //     this.filteredHotels.sort((a, b) => b.rating - a.rating);
+  //   }
+  // }
 
   setPage(page: number) {
     if (page > 0 && page <= this.totalPages) {
       this.currentPage = page;
     }
-  }
-
-  get totalPages() {
-    return Math.ceil(this.hotels.length / this.itemsPerPage);
   }
 }

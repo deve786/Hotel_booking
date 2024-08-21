@@ -4,20 +4,32 @@
     <thead class="bg-gray-50">
       <tr>
         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booking ID</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hotel Name</th> <!-- New column -->
-        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hotel Name</th>
+        <!-- New column -->
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Check-In Date</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Check-Out Date</th>
         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th> <!-- New column for delete -->
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        <!-- New column for delete -->
       </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
-      <tr *ngFor="let booking of pastBookings">
-        <td class="px-6 py-4 whitespace-nowrap">{{ booking.id }}</td>
-        <td class="px-6 py-4 whitespace-nowrap">{{ booking.hotelName }}</td> <!-- Display hotel name -->
-        <td class="px-6 py-4 whitespace-nowrap">{{ booking.date | date }}</td>
+      <tr *ngFor="let booking of pastBookings;let i =index">
+        <td class="px-6 py-4 whitespace-nowrap">{{ i+1 }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <img *ngIf="booking.hotelDetails?.photos?.length > 0"
+            [src]="getImageUrl(booking.hotelDetails.photos[0])"
+            [alt]="booking.hotelDetails.name"
+            class="w-10 h-10 rounded-lg object-fill  text-center">
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ booking.hotelDetails.name }}</td> <!-- Display hotel name -->
+        
+        <td class="py-2 px-4 border-b text-center">{{ booking.checkInDate.slice(0,10) }}</td>
+        <td class="py-2 px-4 border-b text-center">{{ booking.checkOutDate.slice(0,10) }}</td>
         <td class="px-6 py-4 whitespace-nowrap">{{ booking.status }}</td>
         <td class="px-6 py-4 whitespace-nowrap">
-          <button  class="text-red-600 hover:text-red-800">Delete</button> <!-- Delete button -->
+          <button class="text-red-600 hover:text-red-800">Delete</button> <!-- Delete button -->
         </td>
       </tr>
     </tbody>

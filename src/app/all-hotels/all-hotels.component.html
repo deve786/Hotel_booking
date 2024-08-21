@@ -1,8 +1,30 @@
 <div class="p-10">
   <h3 class="text-4xl font-bold uppercase text-center mb-5">Our Hotels</h3>
 
+  <!-- Search Bar and Sort Dropdown -->
+  <!-- <div class="mb-5 flex flex-col md:flex-row justify-center gap-4">
+    <input 
+      type="text" 
+      placeholder="Search hotels..." 
+      [(ngModel)]="searchTerm" 
+      class="px-4 py-2 border rounded-lg w-full md:w-1/3 outline-none" 
+      (input)="applyFilters()">
+    
+    <select 
+      [(ngModel)]="sortBy" 
+      class="px-4 py-2 border rounded-lg w-full md:w-1/3 outline-none" 
+      (change)="applyFilters()">
+      <option value="">Sort by</option>
+      <option value="name">Name</option>
+      <option value="priceAsc">Price: Low to High</option>
+      <option value="priceDesc">Price: High to Low</option>
+      <option value="rating">Rating</option>
+    </select>
+  </div> -->
+
+  <!-- Hotels Listing -->
   <div class="flex flex-wrap justify-center cursor-pointer gap-5">
-    <app-card *ngFor="let hotel of paginatedHotels" [hotel]="hotel"></app-card>
+    <app-card *ngFor="let hotel of hotels" [hotel]="hotel"></app-card>
   </div>
 
   <!-- Pagination Controls -->

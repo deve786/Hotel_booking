@@ -1,44 +1,74 @@
 <div class="p-6 bg-white rounded-lg shadow-md">
-    
-
-    <!-- Add Hotel Form -->
-    <div class="mb-6">
-        <h3 class="text-xl font-medium mb-2">Add New Hotel</h3>
-        <form  #hotelForm="ngForm">
-            <div class="mb-4">
-                <label for="hotelName" class="block text-sm font-medium text-gray-700">Hotel Name</label>
-                <input id="hotelName" name="hotelName" type="text"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                     required>
-            </div>
-            <div class="mb-4">
-                <label for="hotelLocation" class="block text-sm font-medium text-gray-700">Location</label>
-                <input id="hotelLocation" name="hotelLocation" type="text"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                     required>
-            </div>
-            <div class="mb-4">
-                <label for="hotelDescription" class="block text-sm font-medium text-gray-700">Description</label>
-                <textarea id="hotelDescription" name="hotelDescription" rows="3"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                     required></textarea>
-            </div>
-            <div class="mb-4">
-                <label for="hotelImage" class="block text-sm font-medium text-gray-700">Image URL</label>
-                <input id="hotelImage" name="hotelImage" type="text"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                     required>
-            </div>
-            <div class="mb-4">
-                <label for="hotelAmenities" class="block text-sm font-medium text-gray-700">Amenities</label>
-                <input id="hotelAmenities" name="hotelAmenities" type="text"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                     required>
-            </div>
-            <button type="submit"
-                class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700">Add Hotel</button>
-        </form>
-    </div>
-
-    <!-- Optional: List of added hotels could go here -->
+  <div class="mb-6">
+    <h3 class="text-xl font-medium mb-2">Add New Hotel</h3>
+    <form [formGroup]="addHotelForm" (ngSubmit)="addHotel()" enctype="multipart/form-data">
+      <!-- Hotel Name -->
+      <div class="mb-4">
+        <label for="hotelName" class="block text-sm font-medium text-gray-700">Hotel Name</label>
+        <input id="hotelName" formControlName="name" name="name" type="text"
+               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+      </div>
+      <!-- Hotel Location -->
+      <div class="mb-4">
+        <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+        <input id="location" formControlName="location" name="location" type="text"
+               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+      </div>
+      <!-- Price -->
+      <div class="mb-4">
+        <label for="hotelPrice" class="block text-sm font-medium text-gray-700">Price</label>
+        <input id="hotelPrice" formControlName="pricePerNight" name="pricePerNight" type="text"
+               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+      </div>
+      <!-- Hotel Description -->
+      <div class="mb-4">
+        <label for="hotelDescription" class="block text-sm font-medium text-gray-700">Description</label>
+        <textarea id="hotelDescription" formControlName="description" name="hotelDescription" rows="3"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+      </div>
+      <!-- Hotel Images -->
+      <div class="mb-4">
+        <label for="hotelImages" class="block text-sm font-medium text-gray-700">Images (up to 3)</label>
+        <input id="hotelImages" type="file" multiple (change)="onImageSelect($event)" accept="image/*"
+               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <!-- Selected Images Preview -->
+      <div class="mb-4 flex space-x-4">
+        <img *ngFor="let img of selectedImages" [src]="img" alt="Selected Image" class="w-20 h-20 object-cover">
+      </div>
+      <!-- Hotel Amenities -->
+      <div class="mb-4">
+        <label for="hotelAmenities" class="block text-sm font-medium text-gray-700">Amenities</label>
+        <div formGroupName="amenities" class="grid grid-cols-2 gap-2">
+          <div>
+            <input type="checkbox" id="wifi" formControlName="wifi" name="amenities" value="Wi-Fi">
+            <label for="wifi">Wi-Fi</label>
+          </div>
+          <div>
+            <input type="checkbox" id="parking" formControlName="parking" name="amenities" value="Parking">
+            <label for="parking">Parking</label>
+          </div>
+          <div>
+            <input type="checkbox" id="pool" formControlName="pool" name="amenities" value="Pool">
+            <label for="pool">Pool</label>
+          </div>
+          <div>
+            <input type="checkbox" id="gym" formControlName="gym" name="amenities" value="Gym">
+            <label for="gym">Gym</label>
+          </div>
+          <div>
+            <input type="checkbox" id="restaurant" formControlName="restaurant" name="amenities" value="Restaurant">
+            <label for="restaurant">Restaurant</label>
+          </div>
+          <div>
+            <input type="checkbox" id="spa" formControlName="spa" name="amenities" value="Spa">
+            <label for="spa">Spa</label>
+          </div>
+        </div>
+      </div>
+      <!-- Submit Button -->
+      <button type="submit"
+              class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700">Add Hotel</button>
+    </form>
+  </div>
 </div>

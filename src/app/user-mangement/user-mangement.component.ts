@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ApiServicesService } from '../allServices/api-services.service';
 
 @Component({
   selector: 'app-user-mangement',
@@ -6,22 +8,45 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-mangement.component.css']
 })
 export class UserMangementComponent {
-  users: any[] = []; // Define the users property
+  users: any = [];
+  
 
-  constructor() { }
+  constructor(private fb:FormBuilder,private as:ApiServicesService) { }
+
+  userForm = this.fb.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    phone: ['']
+  });
+
 
   ngOnInit(): void {
-    // Call a method to load users data
-    this.loadUsers();
+    this.getUsers()
   }
 
-  // Method to fetch users data
-  loadUsers(): void {
-    // Sample data; replace with actual data fetching logic
-    this.users = [
-      { id: 1, name: 'John Doe', email: 'john.doe@example.com' },
-      { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com' },
-      // Add more sample users as needed
-    ];
+  getUsers() {
+    this.as.getAllUsers().subscribe(
+      (result: any) => {
+        this.users = result; 
+        console.log(result);
+        // Store fetched users in the `users` array
+      },
+      error => {
+        console.error('Error fetching users', error); // Handle errors
+      }
+    );
+  }
+
+  deleteUser(id:any){
+    this.as.deleteUserApi(id).subscribe(
+      (result: any) => {
+        
+        alert("Delete Sucessfully")
+        this.getUsers()
+      },
+      error => {
+        console.error('Error fetching users', error); // Handle errors
+      }
+    );
   }
 }
