@@ -23,12 +23,12 @@ export class AuthenticationComponent {
     if (this.registerForm.valid) {
       const path = this.registerForm.value;
       this.as.signUp({ name: path.name, email: path.email, password: path.password }).subscribe((result: any) => {
-        console.log(result);
+        // console.log(result);
         this.registerForm.reset();
         alert("Successfully Added");
       });
     } else {
-      alert("Invalid Form");
+      alert("Invalid Forms");
     }
   }
 
@@ -36,7 +36,7 @@ export class AuthenticationComponent {
     if (this.registerForm.value) {
       const path = this.registerForm.value;
       this.as.signIn({ email: path.email, password: path.password }).subscribe((result: any) => {
-        console.log(result);
+        // console.log(result);
         this.registerForm.reset();
 
         // Check if the user is an admin

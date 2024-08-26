@@ -20,7 +20,7 @@ export class HotelMangementComponent {
   getAllHotels() {
     this.as.getHotels().subscribe({
       next: (result: any) => {
-        console.log(result);
+        // console.log(result);
         this.hotels = result;
       },
       error: (result: any) => {
@@ -36,7 +36,7 @@ export class HotelMangementComponent {
   deleteHotel(id: any) {
     this.as.deleteHotel(id).subscribe({
       next: (result: any) => {
-        console.log(result);
+        // console.log(result);
         this.getAllHotels();
       },
       error: (error: any) => {
@@ -48,5 +48,8 @@ export class HotelMangementComponent {
     this.router.navigateByUrl(`/edit-hotel/${id}`);
   }
   
+  navigateToAddHotel() {
+    this.router.navigate(['/admin/add']);
+  }
   
 }

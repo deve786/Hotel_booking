@@ -15,6 +15,15 @@ export class CurrentBookingsComponent implements OnInit {
     this.viewBooking();
   }
 
+  cancelBooking(id:any){
+    this.apiService.deleteBooking(id).subscribe({
+      next:(result:any)=>{
+        // console.log(result);
+        this.viewBooking()
+      }
+    })
+  }
+
   viewBooking(): void {
     // Retrieve and parse the user object from localStorage
     const userString = localStorage.getItem('currentUser');
@@ -23,24 +32,24 @@ export class CurrentBookingsComponent implements OnInit {
       try {
         const user = JSON.parse(userString);
         const id = user.id; // Access the user ID
-        console.log('User ID:', id);
+        // console.log('User ID:', id);
 
         this.apiService.currentBookingApi(id).subscribe({
           next: (result: any) => {
             this.currentBookings = result;
-            console.log('Current Bookings:', result);
+            //  console.log('Current Bookings:', result);
             this.currentBookings.forEach(booking => {
               // Fetch hotel details
               this.apiService.getHotelById(booking.hotelId).subscribe(
                 (hotel: any) => {
                   booking.hotelDetails = hotel;
-                  console.log('Hotel Details for Booking:', booking.hotelDetails);
+                  // console.log('Hotel Details for Booking:', booking.hotelDetails);
     
                   // Fetch user details
                   this.apiService.getSingleUserApi(booking.user).subscribe(
                     (user: any) => {
                       booking.userDetails = user; // Add user details to booking
-                      console.log('User Details for Booking:', booking.userDetails);
+                      // console.log('User Details for Booking:', booking.userDetails);
                     },
                     (error: any) => {
                       console.error('Error loading user details:', error);
@@ -48,13 +57,14 @@ export class CurrentBookingsComponent implements OnInit {
                   );
                 },
                 (error: any) => {
-                  console.error('Error loading hotel details:', error);
+                  console.error('Error loading hotel details:', error.message);
                 }
               );
             });
           },
-          error: (err: any) => {
-            console.error('Error fetching current bookings:', err);
+          error: (error: any) => {
+            console.error('Error fetching current bookings:', error.error
+            );
           }
         });
       } catch (error) {

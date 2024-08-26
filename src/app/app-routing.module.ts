@@ -18,12 +18,17 @@ import { AddHotelComponent } from './add-hotel/add-hotel.component';
 import { AdminGuard } from './guards/admin.guard';
 import { UserGuard } from './guards/user.guard';
 import { EditHotelComponent } from './edit-hotel/edit-hotel.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'hotels', component: AllHotelsComponent },
   { path: 'hotel/:id', component: SingleHotelComponent },
   { path: 'login', component: AuthenticationComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
   {
     path: 'dashboard',
     component: SidebarComponent,canActivate: [UserGuard],
@@ -43,6 +48,7 @@ const routes: Routes = [
       { path: 'manage-bookings', component: ManagementBookingsComponent },
       { path: 'edit-hotel/:id', component: EditHotelComponent },
       { path: 'add', component: AddHotelComponent },
+      { path: 'analytics', component: AnalyticsComponent},
       { path: '', redirectTo: 'user-management', pathMatch: 'full' }  // Default route
     ]
   },

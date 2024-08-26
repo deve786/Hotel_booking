@@ -15,6 +15,17 @@ export class PastBookingsComponent {
       this.viewPastBookings();
   }
 
+  deleteBooking(id:any){
+    
+      this.apiService.deleteBooking(id).subscribe({
+        next:(result:any)=>{
+          console.log(result);
+          this.viewPastBookings()
+        }
+      })
+    
+  }
+
   viewPastBookings(): void {
       const userString = localStorage.getItem('currentUser');
 
@@ -22,12 +33,12 @@ export class PastBookingsComponent {
           try {
               const user = JSON.parse(userString);
               const id = user.id;
-              console.log('User ID:', id);
+              // console.log('User ID:', id);
 
               this.apiService.pastBookingsApi(id).subscribe({
                   next: (result: any) => {
                       this.pastBookings = result;
-                      console.log('Past Bookings:', result);
+                      // console.log('Past Bookings:', result);
                       this.pastBookings.forEach(booking => {
                         // Fetch hotel details
                         this.apiService.getHotelById(booking.hotelId).subscribe(

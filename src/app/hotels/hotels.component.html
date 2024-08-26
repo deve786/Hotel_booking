@@ -1,62 +1,30 @@
 <div class="p-20">
     <h3 class="text-4xl font-bold uppercase text-center mb-5">Our Best Picks</h3>
     <div class=" flex flex-wrap justify-center cursor-pointer gap-5">
-        <div routerLink="hotel/:id" class="w-fit hover:shadow-md rounded-lg px-2">
+        <div *ngFor="let hotel of hotels" [routerLink]="['/hotel', hotel._id]" class="w-fit hover:shadow-md rounded-lg px-2">
             <div class="p-2">
-                <img src="assets/room1.jpg" alt="" class="w-72 h-72 rounded-lg object-fill">
-            </div>
-            <div class="mt-1 px-4 pb-2">
-                <div class="flex flex-col gap-1">
-                    <div class="leading-tight">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-semibold text-lg">Stay Home</h3>
-                            <p><i class="fa-solid fa-star"></i> 4.5</p>
+                <img *ngIf="hotel?.photos?.length > 0"
+                    [src]="getImageUrl(hotel.photos[0])" alt="" class="w-72 h-72 rounded-lg object-fill">
+                 </div>
+                <div class="mt-1 px-4 pb-2">
+                    <div class="flex flex-col gap-1">
+                        <div class="leading-tight">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-semibold text-lg">{{hotel.name}}</h3>
+                                <p><i class="fa-solid fa-star"></i> {{hotel.rating}}</p>
+                            </div>
+                            <p class="text-gray-500">{{hotel.location}}</p>
                         </div>
-                        <p class="text-gray-500">Kochi,Kerala</p>
+                        <h3 class="font-semibold text-md">${{hotel.pricePerNight}} / per Night</h3>
                     </div>
-                    <h3 class="font-semibold text-md">$200 / per Night</h3>
                 </div>
             </div>
-        </div>
 
-        <div routerLink="hotel/:id" class="w-fit hover:shadow-md rounded-lg px-2">
-            <div class="p-2">
-                <img src="assets/photo6.jpeg" alt="" class="w-72 h-72 rounded-lg object-fill">
-            </div>
-            <div class="mt-1 px-4 pb-2">
-                <div class="flex flex-col gap-1">
-                    <div class="leading-tight">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-semibold text-lg">City Lights Hotel</h3>
-                            <p><i class="fa-solid fa-star"></i> 4.6</p>
-                        </div>
-                        <p class="text-gray-500">San Francisco, CA</p>
-                    </div>
-                    <h3 class="font-semibold text-md">$275 / per Night</h3>
-                </div>
-            </div>
-        </div>
 
-        <div routerLink="hotel/:id" class="w-fit hover:shadow-md rounded-lg px-2">
-            <div class="p-2">
-                <img src="assets/photo9.webp" alt="" class="w-72 h-72 rounded-lg object-fill">
-            </div>
-            <div class="mt-1 px-4 pb-2">
-                <div class="flex flex-col gap-1">
-                    <div class="leading-tight">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-semibold text-lg">Ocean View Retreat</h3>
-                            <p><i class="fa-solid fa-star"></i> 4.7</p>
-                        </div>
-                        <p class="text-gray-500">Miami, FL</p>
-                    </div>
-                    <h3 class="font-semibold text-md">$350 / per Night</h3>
-                </div>
-            </div>
-        </div>
 
+        </div>
+        <div class="flex justify-center items-center mt-10">
+            <button routerLink="hotels"
+                class="px-8 py-2 rounded-md border bg-black text-white hover:bg-slate-700">More</button>
+        </div>
     </div>
-    <div class="flex justify-center items-center mt-10">
-        <button routerLink="hotels" class="px-8 py-2 rounded-md border bg-black text-white hover:bg-slate-700">More</button>
-    </div>
-</div>

@@ -1,8 +1,10 @@
 <section class="py-8 bg-white">
   <div class="max-w-screen-xl px-4 mx-auto">
     <h1 class="text-2xl font-bold mb-4">Current Bookings</h1>
-
-    <table class="min-w-full bg-white border border-gray-200 rounded-md">
+    <div *ngIf="currentBookings.length === 0" class="text-center p-4">
+      <p class="text-gray-500">No past bookings...</p>
+    </div>
+    <table *ngIf="currentBookings.length > 0" class="min-w-full bg-white border border-gray-200 rounded-md">
       <thead>
         <tr class="bg-gray-100">
           <th class="py-2 px-4 border-b">#</th>
@@ -10,7 +12,7 @@
           <th class="py-2 px-4 border-b">Hotel Name</th>
           <th class="py-2 px-4 border-b">Check-In Date</th>
           <th class="py-2 px-4 border-b">Check-Out Date</th>
-          <th class="py-2 px-4 border-b">Status</th>
+          
           <th class="py-2 px-4 border-b">Actions</th>
         </tr>
       </thead>
@@ -21,14 +23,14 @@
             [src]="getImageUrl(booking.hotelDetails.photos[0])"
             [alt]="booking.hotelDetails.name"
             class="w-10 h-10 rounded-lg object-fill  text-center"></td>
-          <td class="py-2 px-4 border-b text-center">{{ booking.hotelDetails.name }}</td>
+          <td class="py-2 px-4 border-b text-center">{{ booking?.hotelDetails?.name }}</td>
           <td class="py-2 px-4 border-b text-center">{{ booking.checkInDate.slice(0,10) }}</td>
           <td class="py-2 px-4 border-b text-center">{{ booking.checkOutDate.slice(0,10) }}</td>
-          <td class="py-2 px-4 border-b text-center">{{ booking.status }}</td>
+          
           <td class="py-2 px-4 border-b flex gap-3 text-center">
 
 
-            <button class="bg-red-500 text-white px-4 py-1 rounded">Cancel</button>
+            <button (click)="cancelBooking(booking._id)" class="bg-red-500 text-white px-4 py-1 rounded">Cancel</button>
           </td>
         </tr>
       </tbody>

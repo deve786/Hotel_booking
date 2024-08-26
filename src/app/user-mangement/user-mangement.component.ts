@@ -28,7 +28,7 @@ export class UserMangementComponent {
     this.as.getAllUsers().subscribe(
       (result: any) => {
         this.users = result; 
-        console.log(result);
+        // console.log(result);
         // Store fetched users in the `users` array
       },
       error => {

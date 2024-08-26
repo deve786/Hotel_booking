@@ -29,6 +29,11 @@ import { ManagementBookingsComponent } from './management-bookings/management-bo
 import { AddHotelComponent } from './add-hotel/add-hotel.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EditHotelComponent } from './edit-hotel/edit-hotel.component';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+
 
 @NgModule({
   declarations: [
@@ -55,13 +60,18 @@ import { EditHotelComponent } from './edit-hotel/edit-hotel.component';
     ManagementBookingsComponent,
     AddHotelComponent,
     EditHotelComponent,
+    AnalyticsComponent,
+    AboutComponent,
+    ContactComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPayPalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

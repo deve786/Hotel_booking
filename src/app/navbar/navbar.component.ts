@@ -13,6 +13,10 @@ export class NavbarComponent implements OnInit {
 
   constructor(private apiService: ApiServicesService, private router: Router) { }
 
+  navigateToDashboard() {
+    this.router.navigate(['/dashboard']); // Adjust the route to your actual dashboard route
+  }
+  
   ngOnInit(): void {
     this.checkLoginStatus();
     this.getUserName();

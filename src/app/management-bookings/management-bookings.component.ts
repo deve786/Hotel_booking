@@ -21,7 +21,7 @@ export class ManagementBookingsComponent implements OnInit {
     this.apiService.getBookings().subscribe(
       (bookings: any) => {
         this.bookings = bookings;
-        console.log('Bookings:', this.bookings);
+        // console.log('Bookings:', this.bookings);
 
         // Fetch hotel and user details for each booking
         this.bookings.forEach(booking => {
@@ -29,13 +29,13 @@ export class ManagementBookingsComponent implements OnInit {
           this.apiService.getHotelById(booking.hotelId).subscribe(
             (hotel: any) => {
               booking.hotelDetails = hotel;
-              console.log('Hotel Details for Booking:', booking.hotelDetails);
+              // console.log('Hotel Details for Booking:', booking.hotelDetails);
 
               // Fetch user details
               this.apiService.getSingleUserApi(booking.user).subscribe(
                 (user: any) => {
                   booking.userDetails = user; // Add user details to booking
-                  console.log('User Details for Booking:', booking.userDetails);
+                  // console.log('User Details for Booking:', booking.userDetails);
                 },
                 (error: any) => {
                   console.error('Error loading user details:', error);

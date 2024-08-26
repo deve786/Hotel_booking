@@ -24,7 +24,7 @@ export class AllHotelsComponent implements OnInit {
   getHotels() {
     this.as.getHotels().subscribe({
       next: (result: any) => {
-        console.log(result);
+        // console.log(result);
         this.hotels = result;
         // this.filteredHotels = [...this.hotels]; // Initialize filteredHotels
         // this.applyFilters(); // Apply filters after fetching hotels

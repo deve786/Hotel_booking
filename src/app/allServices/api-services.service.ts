@@ -20,7 +20,10 @@ export class ApiServicesService {
   }
   getCurrentUser() {
     const user = localStorage.getItem(this.currentUserKey);
-    return user ? JSON.parse(user) : null; // Parse and return the user info
+    if(user){
+      return user ? JSON.parse(user) : null; // Parse and return the user info
+
+    }
   }
 
   logout() {
@@ -28,8 +31,8 @@ export class ApiServicesService {
   }
 
   isLoggedIn(): boolean {
-    
-    return !!localStorage.getItem('currentUser'); 
+
+    return !!localStorage.getItem('currentUser');
   }
 
 
@@ -43,8 +46,12 @@ export class ApiServicesService {
   }
 
 
-  getSingleUserApi(id:any){
-    
+  updateUserDetails(id: any, bodyData: any) {
+    return this.http.put(`${this.baseUrl}/api/users/update/${id}`, bodyData);
+  }
+
+  getSingleUserApi(id: any) {
+
     return this.http.get(`${this.baseUrl}/api/users/single/${id}`);
 
   }
@@ -59,7 +66,7 @@ export class ApiServicesService {
     return this.http.get(`${this.baseUrl}/api/hotels`);
   }
 
-  getHotelById(id:any){
+  getHotelById(id: any) {
     return this.http.get(`${this.baseUrl}/api/hotels/${id}`);
   }
 
@@ -67,15 +74,15 @@ export class ApiServicesService {
     return this.http.post(`${this.baseUrl}/api/hotels`, bodyData);
   }
 
-  updateHotel(id: string, bodyData: FormData){
+  updateHotel(id: string, bodyData: FormData) {
     return this.http.put(`${this.baseUrl}/api/hotels/${id}`, bodyData);
   }
 
-  deleteHotel(id: string){
+  deleteHotel(id: string) {
     return this.http.delete(`${this.baseUrl}/api/hotels/${id}`);
   }
 
-   // Booking Service Methods
+  // Booking Service Methods
   getBookings() {
     return this.http.get(`${this.baseUrl}/api/bookings`);
   }
@@ -84,7 +91,7 @@ export class ApiServicesService {
   //   return this.http.get(`${this.baseUrl}/api/bookings/${id}`);
   // }
 
-  createBooking(bodyData:any){
+  createBooking(bodyData: any) {
     return this.http.post(`${this.baseUrl}/api/bookings`, bodyData);
   }
 
@@ -92,13 +99,42 @@ export class ApiServicesService {
     return this.http.delete(`${this.baseUrl}/api/bookings/${id}`);
   }
 
-  currentBookingApi(id:any){
+  currentBookingApi(id: any) {
     return this.http.get(`${this.baseUrl}/api/bookings/current/${id}`);
   }
 
   pastBookingsApi(id: any) {
     return this.http.get(`${this.baseUrl}/api/bookings/past/${id}`);
-}
+  }
 
+
+  // review
+  getReviewsByHotelId(id: any) {
+    return this.http.get(`${this.baseUrl}/api/review/hotels/${id}`);
+  }
+
+  postReview(bodyData: any) {
+    return this.http.post(`${this.baseUrl}/api/review`, bodyData);
+  }
+
+  updateHotelRating(hotelId: any, newRating: any) {
+    return this.http.put(`${this.baseUrl}/api/review/hotels/updateRating`,  {hotelId, newRating} );
+  }
+
+
+
+  getBookingsByUserId(userId: any) {
+    return this.http.get(`${this.baseUrl}/api/bookings/user/${userId}`);
+  }
+
+  // Get pending bookings by user ID
+  getPendingBookingsByUserId(userId: any){
+    return this.http.get(`${this.baseUrl}/api/bookings/user/${userId}/pending`);
+  }
+
+  // Get completed bookings by user ID
+  getCompletedBookingsByUserId(userId: any) {
+    return this.http.get(`${this.baseUrl}/api/bookings/user/${userId}/completed`);
+  }
 
 }
